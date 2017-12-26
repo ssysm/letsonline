@@ -14,7 +14,6 @@ Meta.findOne({},[],(err,meta)=>{
                     Meta.findOne({},'counter',(err,metaNew)=>{
                         Obj.uri = docs;
                         Obj.rid = metaNew.counter+1;
-                        console.log(Obj);
                         Meta.update({
                             counter:metaNew.counter
                         },{

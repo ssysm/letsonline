@@ -7,7 +7,6 @@ allStatus = (req,res)=>{
         if(err) res.send(err);
         else {
             Status.find({rid: counter.counter}, [], (err, docs) => {
-                console.log(docs)
                 if (err) {
                     console.log(err)
                 } else {
@@ -36,19 +35,25 @@ status = (req,res)=>{
     Meta.findOne({},[],(err,counter)=> {
         if(err) res.send(err);
         else {
-            Status.find({requestURI: uri,rid:counter.counter}, [],(err,docs)=>{
+            Status.find({
+                rid:counter.counter,
+                "requestPool.request.uri":uri
+        }, [],(err,docs)=>{
+                console.log(docs)
                 if(err){
                     res.send(err)
                 }else{
                     if (!docs) {
                         res.json({
                             success: false,
+                            requestId:counter.counter,
                             uri: uri,
                             message: "No last record found"
                         })
                     } else {
                         res.json({
                             success: true,
+                            requestId:counter.counter,
                             uri: uri,
                             response: docs
                         })

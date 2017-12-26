@@ -1,7 +1,8 @@
 var request = require('sync-request');
-const Status = require('../model/status');
+var Status = require('../model/status');
 SaveDoc = (Obj)=>{
     "use strict";
+    var arr = [];
     for(var i = 0;Obj.uri.length > i;i++){
             try {
                 request('GET', Obj.uri[i].requestURI, {
@@ -12,8 +13,7 @@ SaveDoc = (Obj)=>{
                 });
             }catch(e){
                 if(e){
-                    Status.create({
-                        rid: Obj.rid,
+                    arr.push({
                         request: {
                             uri: Obj.uri[i].requestURI,
                             ua: "Let's Online",
@@ -22,13 +22,6 @@ SaveDoc = (Obj)=>{
                         response: {
                             statusCode: 500,
                             responseTime: 60000
-                        }
-                    }, (err, docs) => {
-                        "use strict";
-                        if (err)
-                            console.log(err);
-                        else {
-                            return true
                         }
                     })
                 }
@@ -42,8 +35,7 @@ SaveDoc = (Obj)=>{
                 });
                 var end = new Date().getTime();
                 var reqTime = parseInt(end - start);
-                Status.create({
-                    rid: Obj.rid,
+                arr.push({
                     request: {
                         uri: Obj.uri[i].requestURI,
                         ua: "Let's Online",
@@ -53,16 +45,16 @@ SaveDoc = (Obj)=>{
                         statusCode: res.statusCode,
                         responseTime: reqTime
                     }
-                }, (err, docs) => {
-                    "use strict";
-                    if (err)
-                        console.log(err);
-                    else {
-                        return true
-                    }
-                })
+                });
             }
     }
+    Status.create({
+        rid:Obj.rid,
+        requestPool:arr,
+        date:parseInt(Date.now())
+    },(err,docs)=>{
+        return !err;
+    })
 };
 
 module.exports.SaveDoc = SaveDoc;

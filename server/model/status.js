@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('debug', true);
 const db = mongoose.connect(require('../config').database);
 
 var schema = mongoose.Schema({
@@ -6,36 +7,39 @@ var schema = mongoose.Schema({
         type: Number,
         required:true
     },
-    request:{
-        uri:{
-            type:String,
-            required: true
+    requestPool:[
+        {
+            request:{
+                uri:{
+                    type:String,
+                    required: true
+                },
+            ua:{
+                type:String,
+                required: true
+            },
+            method:{
+                type:String,
+                default: "GET",
+                required: false
+            }
         },
-        ua:{
-            type:String,
-            required: true
-        },
-        method:{
-            type:String,
-            default: "GET",
-            required: false
+            response:{
+                statusCode: {
+                    type: Number,
+                    required:true
+                },
+                responseTime:{
+                    type:Number,
+                    required:true
+                }
+            }
         }
-    },
-    response:{
-        statusCode: {
-            type: Number,
-            required:true
-        },
-        responseTime:{
-            type:Number,
-            required:true
-        }
-    },
+    ],
     date: {
-        type: Date,
-        default: Date.now()
+        type:Number
     }
 });
-var Status = db.model('status', schema);
+var Status = db.model('status', schema,'status');
 
 module.exports = Status;

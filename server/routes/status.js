@@ -11,8 +11,8 @@ router.get('/latest',(req,res)=>{
     }
 });
 
-router.get('/history/:month',(req,res)=>{
-    history(req,res)
+router.get('/history',(req,res)=>{
+    history(req,res);
 });
 
 module.exports = router;
