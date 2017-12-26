@@ -60,7 +60,8 @@
                   <span style="padding: 5px;">{{response.request.nickname}}</span><span class="badge badge-pill badge-success op" style="margin-right: 5px;">{{response.response.statusCode}}</span><span class="badge badge-pill badge-info op">{{response.response.responseTime}}ms</span>
                 </h4>
               </div>
-              <small>Donec id elit non mi porta.</small>
+
+              <small>Request UA: <b>{{response.request.ua}}</b><br>Method: <b>{{response.request.method}}</b></small>
             </div>
           </div>
         </div>

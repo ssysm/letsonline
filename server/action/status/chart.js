@@ -20,9 +20,18 @@ chart = (req,res)=>{
             else{
                 var obj= {};
                 var series = [];
+                var dateOptions = {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+
+                };
                 for(var i = 0;docs.length > i;i++){
+
                     series.push({
-                        name:new Date(docs[i].date),
+                        name:new Date(docs[i].date).toLocaleTimeString("en-us", dateOptions),
                         value:docs[i].requestPool[0].response.responseTime
                     });
                 }
