@@ -6,7 +6,7 @@ Meta.findOne({},[],(err,meta)=>{
     else{
         setInterval(()=>{
             "use strict";
-            pingPool.find({enable:true},'requestURI',(err,docs)=>{
+            pingPool.find({enable:true},'requestURI nickname',(err,docs)=>{
                 if(err){
                     return false
                 }else{

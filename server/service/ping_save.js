@@ -4,6 +4,7 @@ SaveDoc = (Obj)=>{
     "use strict";
     var arr = [];
     for(var i = 0;Obj.uri.length > i;i++){
+        console.log(Obj.uri[i]);
             try {
                 request('GET', Obj.uri[i].requestURI, {
                     timeout: 60000,
@@ -15,6 +16,7 @@ SaveDoc = (Obj)=>{
                 if(e){
                     arr.push({
                         request: {
+                            nickname: Obj.uri[i].nickname,
                             uri: Obj.uri[i].requestURI,
                             ua: "Let's Online",
                             method: "GET"
@@ -37,6 +39,7 @@ SaveDoc = (Obj)=>{
                 var reqTime = parseInt(end - start);
                 arr.push({
                     request: {
+                        nickname:Obj.uri[i].nickname,
                         uri: Obj.uri[i].requestURI,
                         ua: "Let's Online",
                         method: "GET"

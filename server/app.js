@@ -9,6 +9,7 @@ mongoose.set('debug', true);
 const index = require('./routes/index');
 const users = require('./routes/users');
 const status = require('./routes/status');
+const statusChart = require('./routes/status-chart');
 //Init express
 const app = express();
 //Import service
@@ -18,9 +19,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
 //Init express route
 app.use('/', index);
 app.use('/status',status);
+app.use('/status/chart',statusChart);
 app.use('/auth/user', users);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

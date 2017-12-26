@@ -1,0 +1,79 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="text-center">Server Status</h1>
+  </div>
+</div>
+
+<br>
+
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+
+      <div class="status-perfect label label-success" style="padding: 20px;background-color: #2ecc71;border-radius: 5px;" *ngIf="downNumber !== totalServer">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="" style="margin-top:5px;color:white;font-weight: 500;font-size: 1.25rem">
+              The system are operating normally.
+            </span>
+            <span class="float-right" style="display: inline-block;margin-top: 5px;">
+              Report On {{reqTime | date: 'hh:mm dd/MM/yyyy'}}.
+            </span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="status-reduced" style="padding: 20px;background-color: #f0ad4e!important;border-radius: 5px;" *ngIf="downNumber < totalServer">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span style="margin-top:5px;color:white;font-weight: 500;font-size: 1.25rem">
+              Part system are operating, with few server down.
+            </span>
+            <span class="float-right" style="display: inline-block;margin-top: 5px;">
+              Report On {{reqTime | date: 'hh:mm dd/MM/yyyy'}}.
+            </span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="status-critical" style="padding: 20px;background-color: #d9534f!important;border-radius: 5px;" *ngIf="downNumber === totalServer">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span style="margin-top:5px;color:white;font-weight: 500;font-size: 1.25rem">
+              The system is in <b>critical</b> condition and is no longer functioning normally.
+            </span>
+            <span class="float-right" style="display: inline-block;margin-top: 5px;">
+              Report On {{reqTime | date: 'hh:mm dd/MM/yyyy'}}.
+            </span>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let response of responsesPool">
+              <div class="d-flex w-100 justify-content-between">
+                <h4 class="list-group-item-heading op">
+                  <span style="padding: 5px;">{{response.request.nickname}}</span><span class="badge badge-pill badge-success op" style="margin-right: 5px;">{{response.response.statusCode}}</span><span class="badge badge-pill badge-info op">{{response.response.responseTime}}ms</span>
+                </h4>
+              </div>
+              <small>Donec id elit non mi porta.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 25px;padding: 10px;">
+        <app-graph style="width: 100%;height: 45vh;"></app-graph>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<br><br> <!-- removable spacing, just put it there for the sake of making it look good -->
+
+

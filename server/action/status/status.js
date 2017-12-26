@@ -3,7 +3,7 @@ const Meta = require('../../model/meta');
 allStatus = (req,res)=>{
     "use strict";
     Meta.findOne({},[],(err,counter)=>{
-        console.log(counter.counter)
+        console.log(counter.counter);
         if(err) res.send(err);
         else {
             Status.find({rid: counter.counter}, [], (err, docs) => {

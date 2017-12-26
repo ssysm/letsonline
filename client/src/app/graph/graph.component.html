@@ -1,0 +1,18 @@
+<button class="button button-primary" (click)="toggleGraph()">Show Graph</button>
+<ngx-charts-line-chart
+  [results]="data"
+  [gradient]="gradient"
+  [legend]="legend"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [autoScale]="autoScale"
+  [timeline] = "timeline"
+  (select)="onSelect($event)"
+  *ngIf="loadChart"
+  style="top:5%"
+>
+</ngx-charts-line-chart>

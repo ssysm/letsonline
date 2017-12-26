@@ -10,6 +10,10 @@ var schema = mongoose.Schema({
     requestPool:[
         {
             request:{
+                nickname:{
+                  type:String,
+                  required:true
+                },
                 uri:{
                     type:String,
                     required: true
